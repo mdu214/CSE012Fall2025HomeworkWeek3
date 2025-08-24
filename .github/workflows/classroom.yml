@@ -1,0 +1,110 @@
+name: Autograding Tests
+
+on:
+  push:
+  repository_dispatch:
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run test_q1
+        id: test_q1
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: test_q1
+          setup-command: pip install pytest pylint
+          command: pytest tests/test_q1.py
+          timeout: 10
+          max-score: 10
+      - name: Run test_q2
+        id: test_q2
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: test_q2
+          setup-command: pip install pytest pylint
+          command: pytest tests/test_q2.py
+          timeout: 10
+          max-score: 10
+      - name: Run test_q3
+        id: test_q3
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: test_q3
+          setup-command: pip install pytest pylint
+          command: pytest tests/test_q3.py
+          timeout: 10
+          max-score: 10
+      - name: Run test_q4
+        id: test_q4
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: test_q4
+          setup-command: pip install pytest pylint
+          command: pytest tests/test_q4.py
+          timeout: 10
+          max-score: 10
+      - name: Run test_q5
+        id: test_q5
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: test_q5
+          setup-command: pip install pytest pylint
+          command: pytest tests/test_q5.py
+          timeout: 10
+          max-score: 10
+      - name: Run test_q6
+        id: test_q6
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: test_q6
+          setup-command: pip install pytest pylint
+          command: pytest tests/test_q6.py
+          timeout: 10
+          max-score: 10
+      - name: Run test_q7
+        id: test_q7
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: test_q7
+          setup-command: pip install pytest pylint
+          command: pytest tests/test_q7.py
+          timeout: 10
+          max-score: 10
+      - name: Run test_q8
+        id: test_q8
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: test_q8
+          setup-command: pip install pytest pylint
+          command: pytest tests/test_q8.py
+          timeout: 10
+          max-score: 10
+      - name: Run test_q9
+        id: test_q9
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: test_q9
+          setup-command: pip install pytest pylint
+          command: pytest tests/test_q9.py
+          timeout: 10
+          max-score: 10
+      - name: Run test_q10
+        id: test_q10
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: test_q10
+          setup-command: pip install pytest pylint
+          command: pytest tests/test_q10.py
+          timeout: 10
+          max-score: 10
+
