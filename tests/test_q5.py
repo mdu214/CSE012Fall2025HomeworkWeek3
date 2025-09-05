@@ -1,7 +1,9 @@
+# tests/test_q5.py
+import importlib, pathlib, sys
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 
-import importlib
-
-def test_q5():
-    q5 = importlib.import_module("q5")
-    assert q5.square_or_rectangle(5, 5) == "This is a square!"
-    assert q5.square_or_rectangle(10, 5) == "This is a rectangle."
+def test_q5_sum_all():
+    mod = importlib.import_module("q5")
+    assert mod.sum_all(1, 2, 3) == 6
+    assert mod.sum_all() == 0
+    assert mod.sum_all(10, -5, 5) == 10

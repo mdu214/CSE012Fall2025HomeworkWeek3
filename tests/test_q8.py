@@ -1,10 +1,9 @@
+# tests/test_q8.py
+import importlib, pathlib, sys
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 
-import importlib
-
-def test_q8():
-    q8 = importlib.import_module("q8")
-    assert q8.triangle_count(3) == [
-        "This is triangle number 1",
-        "This is triangle number 2",
-        "This is triangle number 3",
-    ]
+def test_q8_multiply_docstring():
+    mod = importlib.import_module("q8")
+    assert mod.multiply(2, 4) == 8
+    doc = mod.multiply.__doc__
+    assert doc is not None and "parameters" in doc.lower()

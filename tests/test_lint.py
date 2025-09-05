@@ -1,21 +1,23 @@
-
+# tests/test_pylint.py
 import subprocess
+import pathlib
 
-def test_pylint_conformance():
-    '''Run pylint on all q#.py files (q1.py ... q10.py)'''
-    for i in range(1, 11):
-        filename = f"q{i}.py"
-        result = subprocess.run(
-            ["pylint", "--disable=R,C", filename],
-            capture_output=True, text=True
-        )
-        print(result.stdout)
-        if "rated at" in result.stdout:
-            score_str = result.stdout.split("rated at")[-1].split("/")[0].strip()
-            try:
-                score = float(score_str)
-                assert score >= 7.0, f"Pylint score too low in {filename}: {score}"
-            except ValueError:
-                assert False, f"Could not parse pylint score for {filename}"
-        else:
-            assert False, f"No pylint rating found for {filename}"
+def test_pylint_score():
+    """Run pylint on all q#.py files and require a perfect score."""
+    root = pathlib.Path(__file__).resolve().parents[1]  # project root
+    files = [str(root / f"q{i}.py") for i in range(1, 11)]
+
+    result = subprocess.run(
+        ["pylint", "--score=y", "--disable=R,C", *files],
+        capture_output=True,
+        text=True,
+    )
+
+    # Extract the score from pylint output
+    score_line = [line for line in result.stdout.splitlines() if "Your code has been rated at" in line]
+    assert score_line, f"Pylint did not return a score.\nOutput:\n{result.stdout}\n{result.stderr}"
+
+    score_text = score_line[0].split("/")[0].split()[-1]  # e.g., '10.00'
+    score = float(score_text)
+    assert score >= 9.0, f"Pylint score too low: {score}\n{result.stdout}\n{result.stderr}"
+

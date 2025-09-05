@@ -1,6 +1,10 @@
+# tests/test_q6.py
+import importlib, pathlib, sys
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 
-import importlib
-
-def test_q6():
-    q6 = importlib.import_module("q6")
-    assert q6.longest_side(5, 12, 9) == "b"
+def test_q6_print_info():
+    mod = importlib.import_module("q6")
+    result = mod.print_info(name="Alice", age=30)
+    assert isinstance(result, dict)
+    assert result["name"] == "Alice"
+    assert result["age"] == 30

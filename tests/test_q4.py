@@ -1,7 +1,8 @@
+# tests/test_q4.py
+import importlib, pathlib, sys
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 
-import importlib
-
-def test_q4():
-    q4 = importlib.import_module("q4")
-    types = q4.variable_types(10, 3.14*7*7)
-    assert types == (int, float)
+def test_q4_greet_default():
+    mod = importlib.import_module("q4")
+    assert mod.greet_default() == "Hello, World!"
+    assert mod.greet_default("Bob") == "Hello, Bob!"

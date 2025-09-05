@@ -1,9 +1,8 @@
+# tests/test_q10.py
+import importlib, pathlib, sys
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 
-import importlib
-
-def test_q10():
-    q10 = importlib.import_module("q10")
-    shapes = ["circle", "square", "triangle", "rectangle"]
-    inputs = ["circle", "hexagon", "quit", "triangle"]
-    results = q10.choose_shape(inputs, shapes)
-    assert results == ["You chose a valid shape!", "Unknown shape."]
+def test_q10_shout_nested():
+    mod = importlib.import_module("q10")
+    assert mod.shout("hello") == "HELLO"
+    assert mod.shout("Python") == "PYTHON"

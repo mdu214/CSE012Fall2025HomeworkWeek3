@@ -1,6 +1,8 @@
+# tests/test_q3.py
+import importlib, pathlib, sys
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 
-import importlib
-
-def test_q3():
-    q3 = importlib.import_module("q3")
-    assert abs(q3.circle_area(7) - 153.86) < 0.01
+def test_q3_square():
+    mod = importlib.import_module("q3")
+    assert mod.square(4) == 16
+    assert mod.square(-3) == 9
